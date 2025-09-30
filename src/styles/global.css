@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f9fafb; /* light grey */
+  color: #111827; /* almost black */
+}
