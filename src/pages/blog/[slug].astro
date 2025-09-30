@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostLayout from '../../layouts/BlogPost.astro';
+
+// This function is required for Astro to generate static pages from dynamic routes.
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+// Get the current post from Astro.props
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<!-- Render the layout with the post's data and content -->
+<BlogPostLayout {...post.data}>
+	<Content />
+</BlogPostLayout>
