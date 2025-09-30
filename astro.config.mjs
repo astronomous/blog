@@ -7,9 +7,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	// Replace with your own domain
-	site: 'https://<YOUR_USERNAME>.github.io',
-	// Replace with your repository name
-	base: '/<YOUR_REPO_NAME>',
+	site: 'https://example.com',
 	integrations: [mdx(), sitemap(), tailwind()],
 });
