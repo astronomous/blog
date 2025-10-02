@@ -2,6 +2,7 @@
 title: 'The Power of Tailwind CSS'
 description: 'Why I love using Tailwind for my projects.'
 pubDate: 'Oct 15 2023'
+tags: ['CSS', 'Web Development', 'Tailwind']
 ---
 
 I've been using Tailwind CSS for a while now, and I have to say, I'm a huge fan. It's a utility-first CSS framework that makes it incredibly easy to build modern, responsive designs without writing a single line of custom CSS.

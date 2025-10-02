@@ -2,6 +2,7 @@
 title: 'Exploring the Jamstack'
 description: 'A look at the modern architecture for building websites.'
 pubDate: 'Nov 01 2023'
+tags: ['Jamstack', 'Web Architecture', 'Performance']
 ---
 
 The Jamstack (JavaScript, APIs, and Markup) is a modern web development architecture that is changing how we build websites and applications. Instead of relying on a monolithic backend, the Jamstack uses a decoupled approach where the frontend is pre-built into static files and served from a CDN.

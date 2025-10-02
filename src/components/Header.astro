@@ -1,17 +1,118 @@
 ---
 import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
 ---
-
-<header class="bg-white shadow-sm">
-	<nav class="container mx-auto flex items-center justify-between p-4">
-		<h2 class="text-xl font-bold">
-			<a href="/">{SITE_TITLE}</a>
-		</h2>
-		<div>
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-	</nav>
+<header>
+  <nav>
+    <div class="menu-items">
+      <a href="/" class="menu-item">Home</a>
+      <a href="/about" class="menu-item">About</a>
+      <div class="menu-item dropdown-container">
+        <span>Work with Me</span>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">Service 1</a>
+          <a href="#" class="dropdown-item">Service 2</a>
+          <a href="#" class="dropdown-item">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="header-title">{SITE_TITLE}</div>
+    <div class="menu-actions">
+      <button id="dark-mode-toggle" class="win95-button win95-raised">
+        Dark Mode
+      </button>
+    </div>
+  </nav>
 </header>
+
+<style>
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: var(--button-bg);
+    border-top: 2px solid var(--border-light);
+    border-left: 2px solid var(--border-light);
+    border-bottom: 2px solid var(--border-dark);
+    border-right: 2px solid var(--border-dark);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 10px;
+  }
+  .menu-items {
+    display: flex;
+    height: 100%;
+  }
+  .menu-item {
+    display: inline-block;
+    font-family: Arial, "MS Sans Serif", sans-serif;
+    font-size: 13px;
+    padding: 0 16px;
+    line-height: 36px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  .menu-item:hover {
+    background: var(--menu-item-hover-bg);
+    border-top: 2px solid var(--border-light);
+    border-left: 2px solid var(--border-light);
+    border-bottom: 2px solid var(--border-dark);
+    border-right: 2px solid var(--border-dark);
+  }
+  .menu-item:active, .menu-item.active {
+    background: var(--button-active-bg);
+    border-top: 2px solid var(--border-dark);
+    border-left: 2px solid var(--border-dark);
+    border-bottom: 2px solid var(--border-light);
+    border-right: 2px solid var(--border-light);
+  }
+  .dropdown-container {
+    position: relative;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--button-bg);
+    border-top: 2px solid var(--border-light);
+    border-left: 2px solid var(--border-light);
+    border-bottom: 2px solid var(--border-dark);
+    border-right: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    min-width: 180px;
+    padding: 2px;
+    z-index: 1001;
+  }
+  .dropdown-container:hover .dropdown-menu {
+    display: block;
+  }
+  .dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  .dropdown-item:hover {
+    background: var(--dropdown-item-hover-bg);
+    color: var(--dropdown-item-hover-text);
+  }
+  .header-title {
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  .menu-actions .win95-button {
+    padding: 4px 12px;
+  }
+</style>

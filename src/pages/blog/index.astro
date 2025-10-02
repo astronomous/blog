@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import FormattedDate from '../../components/FormattedDate.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -14,28 +14,123 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				padding: 60px 20px 20px;
+			}
+			.main-window {
+				background: var(--content-bg);
+				border-top: 3px solid var(--border-dark);
+				border-left: 3px solid var(--border-dark);
+				border-bottom: 3px solid var(--border-light);
+				border-right: 3px solid var(--border-light);
+			}
+			.title-bar {
+				background: var(--title-bar-bg);
+				height: 28px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 0 4px;
+				color: var(--title-bar-text);
+				font-weight: bold;
+			}
+			.title-bar-controls {
+				display: flex;
+			}
+			.title-bar-controls .win95-button {
+				width: 20px;
+				height: 20px;
+				line-height: 16px;
+				padding: 0;
+				margin-left: 2px;
+				font-size: 10px;
+				font-weight: bold;
+			}
+			.window-content {
+				padding: 20px;
+			}
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.post-item {
+				background: var(--content-bg);
+				border: 1px solid var(--border-dark);
+				padding: 12px;
+				margin-bottom: 12px;
+			}
+			.post-item:hover {
+				border-top: 2px solid var(--border-light);
+				border-left: 2px solid var(--border-light);
+				border-bottom: 2px solid var(--border-dark);
+				border-right: 2px solid var(--border-dark);
+				box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+			}
+			.post-title {
+				font-size: 16px;
+				font-weight: bold;
+				margin: 0 0 8px 0;
+			}
+			.post-date {
+				font-size: 11px;
+				color: var(--text-color);
+				opacity: 0.8;
+			}
+			.tag-container {
+				margin-top: 8px;
+			}
+			.tag-pill {
+				display: inline-block;
+				background: var(--tag-bg);
+				border: 1px solid var(--tag-border);
+				border-radius: 3px;
+				padding: 2px 8px;
+				font-size: 10px;
+				margin: 2px;
+				color: var(--text-color);
+			}
+		</style>
 	</head>
-	<body class="bg-light-gray text-almost-black">
+	<body>
 		<Header />
-		<main class="container mx-auto px-4 py-8">
-			<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{
-					posts.map((post) => (
-						<a
-							href={`/blog/${post.slug}/`}
-							class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-						>
-							<div class="p-6">
-								<h4 class="text-2xl font-bold mb-2">{post.data.title}</h4>
-								<p class="text-gray-500">
-									<FormattedDate date={post.data.pubDate} />
-								</p>
-							</div>
-						</a>
-					))
-				}
-			</section>
+		<main>
+			<div class="main-window">
+				<div class="title-bar">
+					<div class="title-bar-text">C:\MY_BLOG\POSTS</div>
+					<div class="title-bar-controls">
+						<div class="win95-button win95-raised">_</div>
+						<div class="win95-button win95-raised">[]</div>
+						<div class="win95-button win95-raised">X</div>
+					</div>
+				</div>
+				<div class="window-content">
+					<h1>All Blog Posts</h1>
+					<ul class="post-list">
+						{
+							posts.map((post) => (
+								<li>
+									<a href={`/blog/${post.slug}/`} class="post-item" style="display: block; text-decoration: none; color: inherit;">
+										<h2 class="post-title">{post.data.title}</h2>
+										<p class="post-date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+										{post.data.tags && post.data.tags.length > 0 && (
+											<div class="tag-container">
+												{post.data.tags.map((tag) => (
+													<span class="tag-pill">{tag}</span>
+												))}
+											</div>
+										)}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
 		</main>
 		<Footer />
 	</body>

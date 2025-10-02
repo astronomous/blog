@@ -1,9 +1,86 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --bg-color: #D4D0C8;
+  --text-color: #000000;
+  --link-color: #0000EE;
+  --link-visited-color: #551A8B;
+  --border-light: #FFFFFF;
+  --border-dark: #808080;
+  --title-bar-bg: #000080;
+  --title-bar-text: #FFFFFF;
+  --content-bg: #FFFFFF;
+  --button-active-bg: #C0C0C0;
+  --tag-bg: #E0E0E0;
+  --tag-border: #A0A0A0;
+}
 
+[data-theme="dark"] {
+  --bg-color: #2D2D2D;
+  --text-color: #E0E0E0;
+  --link-color: #4D9FFF;
+  --link-visited-color: #BE95FF;
+  --border-light: #5A5A5A;
+  --border-dark: #1A1A1A;
+  --title-bar-bg: #1E3A8A;
+  --title-bar-text: #E0E0E0;
+  --content-bg: #3C3C3C;
+  --button-active-bg: #5A5A5A;
+  --tag-bg: #5A5A5A;
+  --tag-border: #808080;
+}
+
+/* Windows 3.1 Core Styling */
 body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: #f9fafb; /* light grey */
-  color: #111827; /* almost black */
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, "MS Sans Serif", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: default;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+h1 { font-size: 20px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--link-visited-color);
+}
+
+/* 3D Border Effects */
+.win95-raised {
+  border-top: 2px solid var(--border-light);
+  border-left: 2px solid var(--border-light);
+  border-bottom: 2px solid var(--border-dark);
+  border-right: 2px solid var(--border-dark);
+}
+
+.win95-inset {
+  border-top: 2px solid var(--border-dark);
+  border-left: 2px solid var(--border-dark);
+  border-bottom: 2px solid var(--border-light);
+  border-right: 2px solid var(--border-light);
+}
+
+/* General Button Styling */
+.win95-button {
+  background: var(--bg-color);
+  padding: 6px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.win95-button:not(:disabled):active {
+  background: var(--button-active-bg);
 }

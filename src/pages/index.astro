@@ -15,42 +15,116 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				padding: 60px 20px 20px; /* Account for fixed header */
+			}
+			.main-window {
+				background: var(--content-bg);
+				border-top: 3px solid var(--border-dark);
+				border-left: 3px solid var(--border-dark);
+				border-bottom: 3px solid var(--border-light);
+				border-right: 3px solid var(--border-light);
+			}
+			.title-bar {
+				background: var(--title-bar-bg);
+				height: 28px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 0 4px;
+				color: var(--title-bar-text);
+				font-weight: bold;
+			}
+			.title-bar-controls {
+				display: flex;
+			}
+			.title-bar-controls .win95-button {
+				width: 20px;
+				height: 20px;
+				line-height: 16px;
+				padding: 0;
+				margin-left: 2px;
+				font-size: 10px;
+				font-weight: bold;
+			}
+			.window-content {
+				padding: 20px;
+			}
+			.blog-table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			.blog-table th,
+			.blog-table td {
+				border: 1px solid var(--border-dark);
+				padding: 6px 8px;
+				text-align: left;
+			}
+			.blog-table thead {
+				background-color: var(--bg-color);
+			}
+			.blog-table th {
+				font-weight: bold;
+			}
+			.tag-pill {
+				display: inline-block;
+				background: var(--tag-bg);
+				border: 1px solid var(--tag-border);
+				border-radius: 3px;
+				padding: 2px 8px;
+				font-size: 10px;
+				margin: 2px;
+				color: var(--text-color);
+			}
+		</style>
 	</head>
-	<body class="bg-light-gray text-almost-black">
+	<body>
 		<Header />
-		<main class="container mx-auto px-4 py-8">
-			<h1 class="text-4xl font-bold text-center mb-8">My Awesome Blog</h1>
-			<p class="text-center text-xl mb-12">Welcome to my corner of the internet!</p>
-
-			<div class="overflow-x-auto">
-				<table class="min-w-full bg-white shadow-md rounded-lg">
-					<thead class="bg-gray-200">
-						<tr>
-							<th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-								>Title</th
-							>
-							<th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-								>Published On</th
-							>
-						</tr>
-					</thead>
-					<tbody class="divide-y divide-gray-200">
-						{
-							posts.map((post) => (
-								<tr>
-									<td class="py-4 px-6 whitespace-nowrap">
-										<a href={`/blog/${post.slug}/`} class="text-blue-600 hover:underline">
-											{post.data.title}
-										</a>
-									</td>
-									<td class="py-4 px-6 whitespace-nowrap text-gray-500">
-										<FormattedDate date={post.data.pubDate} />
-									</td>
-								</tr>
-							))
-						}
-					</tbody>
-				</table>
+		<main>
+			<div class="main-window">
+				<div class="title-bar">
+					<div class="title-bar-text">C:\MY_BLOG</div>
+					<div class="title-bar-controls">
+						<div class="win95-button win95-raised">_</div>
+						<div class="win95-button win95-raised">[]</div>
+						<div class="win95-button win95-raised">X</div>
+					</div>
+				</div>
+				<div class="window-content">
+					<h1>My Awesome Blog</h1>
+					<p>Welcome to my corner of the internet!</p>
+					<br />
+					<table class="blog-table win95-inset">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Published On</th>
+								<th>Tags</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								posts.map((post) => (
+									<tr>
+										<td>
+											<a href={`/blog/${post.slug}/`}>
+												{post.data.title}
+											</a>
+										</td>
+										<td>
+											<FormattedDate date={post.data.pubDate} />
+										</td>
+										<td>
+											{post.data.tags &&
+												post.data.tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+										</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</main>
 		<Footer />

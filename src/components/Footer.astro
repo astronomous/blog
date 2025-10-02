@@ -2,6 +2,17 @@
 const today = new Date();
 ---
 
-<footer class="text-center p-8 text-gray-500">
+<footer>
 	&copy; {today.getFullYear()} My Awesome Blog. All rights reserved.
 </footer>
+
+<style>
+  footer {
+    background: var(--bg-color);
+    border-top: 2px solid var(--border-light);
+    padding: 16px;
+    text-align: center;
+    font-size: 11px;
+    margin-top: 20px; /* Add some space from the content above */
+  }
+</style>
